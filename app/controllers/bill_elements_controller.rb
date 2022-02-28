@@ -1,0 +1,2 @@
+class BillElementsController < ApplicationController
+end

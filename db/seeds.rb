@@ -5,3 +5,18 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+prices = [50,30,20,15,75,20,10]
+("A"..."G").each_with_index do |code,index|
+  element = Element.new(code:code, price: prices[index])
+  if code == "A"
+    element.element_sales.build(quantity: 3, sale_price: 130)
+    element.sale = true
+  elsif code =="B"
+    element.element_sales.build(quantity: 2, sale_price: 45)
+    element.sale = true
+  elsif code =="E"
+    element.element_sales.build(quantity: 3, sale_price: 120)
+    element.sale = true
+  end
+  element.save
+end

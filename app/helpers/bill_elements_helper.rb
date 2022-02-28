@@ -1,0 +1,2 @@
+module BillElementsHelper
+end

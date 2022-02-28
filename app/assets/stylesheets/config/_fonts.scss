@@ -1,0 +1,40 @@
+// Import Google fonts
+//@import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+// Define fonts for body and headers
+$body-font: "Open Sans", "sans-serif";
+$headers-font:  "Open Sans", "sans-serif";
+
+// To use a font file (.woff) uncomment following lines
+// @font-face {
+//   font-family: "Font Name";
+//   src: font-url('FontFile.eot');
+//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
+//        font-url('FontFile.woff') format('woff'),
+//        font-url('FontFile.ttf') format('truetype')
+// }
+// $my-font: "Font Name";
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+
+
+html{
+  font-weight: 400;
+
+
+}
+
+button{
+  font-weight: 400;
+
+}
+.form-control{
+  font-weight: 400;
+
+}
+.btn{
+  font-weight: 400;
+
+}
+table th {
+font-weight: 400;
+}
