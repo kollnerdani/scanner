@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_223312) do
   create_table "bill_elements", force: :cascade do |t|
     t.bigint "bill_id", null: false
     t.bigint "element_id", null: false
+    t.string "original_element", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bill_id"], name: "index_bill_elements_on_bill_id"
@@ -24,7 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_223312) do
   end
 
   create_table "bills", force: :cascade do |t|
-    t.string "total"
+    t.string "total", array: true
     t.boolean "payed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -1,5 +1,12 @@
 <div class="container">
   <div class="form">
+    <div class="row">
+      <div class="col">
+        <%=link_to "Bills", bills_path, class:"btn btn-success"  %>
+      </div>
+    </div>
+  </div>
+  <div class="form">
     <%@elements.each do |element|  %>
       <div class="row">
         <div class="col">
@@ -22,7 +29,9 @@
                   Sale Price: <%=sale.sale_price  %>$
                 </div>
                 <div class="col">
-                  <%=link_to "Edit", edit_element_element_sale_path(element,sale), class:"btn btn-success", data:{bs_toggle:"modal", bs_target:"#saleElement#{sale.id}"}  %>
+                  <%=link_to "#", class:"btn btn-success", data:{bs_toggle:"modal", bs_target:"#saleElement#{sale.id}"} do %>
+                    Edit
+                  <%end  %>
                 </div>
               <%end  %>
             </div>
@@ -35,32 +44,32 @@
   </div>
   <%@element_sales.each do |sale| %>
     <!-- Modal -->
-  <div class="modal fade" id="saleElement<%=sale.id  %>" tabindex="-1" aria-labelledby="saleElement<%=sale.id  %>Label" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="saleElement<%=sale.id  %>Label">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="form">
-            <%= simple_form_for [sale.element, sale] do |f| %>
-              <%= f.error_notification %>
-              <div class="form-inputs">
-                <h3><%=f.label t("activerecord.models.#{f.object_name}")%></h3><br>
-                <%=f.input :quantity, input_html:{class:"input"}%><br>
-                <%=f.input :sale_price, input_html:{class:"input"} %><br>
-                <div class="form-actions">
-                  <%= f.button :button, :submit, class:"btn btn-success" do %>
-                    Save
-                  <%end  %>
+    <div class="modal fade" id="saleElement<%=sale.id  %>" tabindex="-1" aria-labelledby="saleElement<%=sale.id  %>Label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="saleElement<%=sale.id  %>Label">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form">
+              <%= simple_form_for [sale.element, sale] do |f| %>
+                <%= f.error_notification %>
+                <div class="form-inputs">
+                  <h3><%=f.label t("activerecord.models.#{f.object_name}")%></h3><br>
+                  <%=f.input :quantity, input_html:{class:"input"}%><br>
+                  <%=f.input :sale_price, input_html:{class:"input"} %><br>
+                  <div class="form-actions">
+                    <%= f.button :button, :submit, class:"btn btn-success" do %>
+                      Save
+                    <%end  %>
+                  </div>
                 </div>
-              </div>
-            <%end  %>
+              <%end  %>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   <%end  %>
 </div>

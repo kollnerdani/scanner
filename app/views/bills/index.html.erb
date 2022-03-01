@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="form">
+    <div class="row">
+      <div class="col">
+        <%=link_to "Elements", elements_path, class:"btn btn-success"  %>
+      </div>
+      <div class="col">
+        <%=link_to "New", new_bill_path, class:"btn btn-success"  %>
+      </div>
+    </div>
+  </div>
+    <%@bills.each do |bill|  %>
+      <div class="form">
+        <div class="row">
+          <h3><%=bill.id  %></h3>
+         <div class="col">
+          <%bill.bill_elements.each do |bill_element|  %>
+          <div class="col">
+            <%=bill_element.element.code  %>
+          </div>
+          <div class="col">
+            <% if bill_element.element.price != bill_element.original_element[1].to_i  %>
+              <div class="badge">New price: <%=bill_element.element.price  %>$</div>
+            <% end %>
+            <div class="col"><%= bill_element.original_element[1] %>$</div>
+          </div><br><hr>
+        <%end  %>
+        <div class="row">
+          <div class="col">
+            Normal: <%=bill.total[0]%>$
+          </div>
+          <div class="col">
+            Total Sale: <%=bill.total[1]  %>$
+          </div>
+          <div class="col">
+            Total: <%=bill.total[2]  %>$
+          </div>
+        </div>
+      </div>
+        </div>
+    <%end  %>
+
+  </div>
+</div>

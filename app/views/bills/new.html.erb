@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="form">
+    <%= simple_form_for @bill do |f| %>
+      <%= f.error_notification %>
+      <div class="form-inputs">
+        <h3><%=f.label t("activerecord.models.#{f.object_name}")%></h3><br>
+        <div class="form-actions">
+          <%=f.hidden_field :payed, value: false  %>
+          <%= f.button :button, :submit, class:"btn btn-success" do %>
+            Start
+          <%end  %>
+        </div>
+      </div>
+    <%end  %>
+  </div>
+</div

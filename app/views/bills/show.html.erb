@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="form">
+    <div>
+      <%=link_to "#", class:"btn btn-success", data:{bs_toggle:"modal", bs_target:"#newBillElement"} do %>
+        Scan new <%=t("activerecord.models.bill_element")  %>
+      <%end  %>
+    </div><br>
+    <% if !@bill.bill_elements.empty? %>
+      <%@bill.bill_elements.each do |bill_element|  %>
+        <div class="col">
+          <%=bill_element.element.code  %>
+          <%=bill_element.element.price  %>$<hr>
+        </div>
+      <%end  %>
+      <div class="row">
+        <div class="col">Normal Price: <br> <%=@normal%>$</div>
+        <div class="col">Sale: <br><%=@total_sale  %>$</div>
+        <div class="col">Total: <br><%=@total  %>$</div>
+      </div>
+    <% end %>
+    <%= simple_form_for @bill do |f| %>
+      <%= f.error_notification %>
+      <div class="form-inputs">
+        <%=f.hidden_field :payed, value: true%><br>
+        <div class="form-actions">
+          <%= f.button :button, :submit, class:"btn btn-success" do %>
+            Check Out
+          <%end  %>
+        </div>
+      </div>
+    <%end  %>
+  </div>
+  <div class="modal fade" id="newBillElement" tabindex="-1" aria-labelledby="newBillElementLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newBillElementLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form">
+              <%= simple_form_for [@bill,@bill_element] do |f| %>
+                <%= f.error_notification %>
+                <div class="form-inputs">
+                  <h3><%=f.label t("activerecord.models.#{f.object_name}")%></h3><br>
+                  <%=f.input :element_id, collection: Element.all.map{|e| ["#{e.code}/#{e.price}", e.id]}%><br>
+                  <div class="form-actions">
+                    <%= f.button :button, :submit, class:"btn btn-success" do %>
+                      Save
+                    <%end  %>
+                  </div>
+                </div>
+              <%end  %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
