@@ -4,7 +4,6 @@
       <%= f.error_notification %>
       <div class="form-inputs">
         <h3><%=f.label t("activerecord.models.#{f.object_name}")%></h3><br>
-        <%=f.input :code, collection: @codes,as: :radio_buttons, input_html: { class: "tag-selector" },item_wrapper_class: 'tag-item', label:false%><br>
         <%=f.label :price  %>
         <%=f.input :price, input_html:{class:"input"}, label:false%><br>
         <%=f.input :sale, as: :boolean, input_html:{class:"toggle"}  %><br>

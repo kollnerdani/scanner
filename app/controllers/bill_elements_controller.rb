@@ -1,4 +1,5 @@
 class BillElementsController < ApplicationController
+
   def create
     @bill = Bill.find(params[:bill_id])
     @bill_element = BillElement.new(bill_element_params)
@@ -15,6 +16,12 @@ class BillElementsController < ApplicationController
     else
       redirect_to bill_path(@bill)
     end
+  end
+  def destroy
+    @bill = Bill.find(params[:bill_id])
+    @bill_element = BillElement.find(params[:id])
+    @bill_element.destroy
+    redirect_to bill_path(@bill)
   end
 private
   def bill_element_params

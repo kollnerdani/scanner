@@ -23,6 +23,12 @@ class ElementsController < ApplicationController
     @codes = ("A".."Z").to_a - Element.select{|e| e.id != @element.id}.map{|el| el.code}
   end
   def update
+    if params[:element][:sale] == "1" && @element.element_sales.empty?
+      @element.element_sales.build
+    elsif params[:element][:sale] == "0" && !@element.element_sales.empty?
+      @element.element_sales.last.delete
+
+    end
     if @element.update(element_params)
       redirect_to elements_path
     else

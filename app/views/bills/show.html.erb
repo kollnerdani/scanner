@@ -9,7 +9,10 @@
       <%@bill.bill_elements.each do |bill_element|  %>
         <div class="col">
           <%=bill_element.element.code  %>
-          <%=bill_element.element.price  %>$<hr>
+          <%=bill_element.element.price  %>$
+          <%= link_to "Remove" ,bill_bill_element_path(@bill,bill_element), class: "link", data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"} %><hr>
         </div>
       <%end  %>
       <div class="row">

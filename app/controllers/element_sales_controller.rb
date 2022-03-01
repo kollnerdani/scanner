@@ -1,12 +1,12 @@
 class ElementSalesController < ApplicationController
-before_action :find_element_sale, only:[:update]
-def update
-  if @element_sale.update(element_sale_params)
-    redirect_to elements_path
-  else
-    redirect_to elements_path
+  before_action :find_element_sale, only:[:update]
+  def update
+    if @element_sale.update(element_sale_params)
+      redirect_to elements_path
+    else
+      redirect_to elements_path
+    end
   end
-end
 private
   def element_sale_params
     params.require(:element_sale).permit(:quantity, :sale_price)
