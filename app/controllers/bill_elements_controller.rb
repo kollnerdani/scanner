@@ -5,9 +5,9 @@ class BillElementsController < ApplicationController
     @bill_element.bill = @bill
     @element = Element.find( params[:bill_element][:element_id])
     if @element.element_sales.empty?
-      @bill_element.original_element = [@element.code, @element.price.to_i]
+      @bill_element.original_element = [@element.code, @element.price.to_f]
     else
-      @bill_element.original_element = [@element.code, @element.price.to_i, @element.element_sales.last.quantity.to_s,@element.element_sales.last.sale_price.to_s]
+      @bill_element.original_element = [@element.code, @element.price.to_f, @element.element_sales.last.quantity,@element.element_sales.last.sale_price.to_f]
     end
     if @bill_element.valid?
       @bill_element.save

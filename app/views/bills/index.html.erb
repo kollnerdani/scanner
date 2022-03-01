@@ -31,7 +31,7 @@
                 <%=bill_element.element.code  %>
               </div>
               <div class="col">
-              <% if bill_element.element.price != bill_element.original_element[1].to_i  %>
+              <% if bill_element.element.price != bill_element.original_element[1].to_f  %>
                 <div class="badge">New price: <%=bill_element.element.price  %>$</div>
               <% end %>
               <div class="col"><%= bill_element.original_element[1] %>$</div>
@@ -43,7 +43,7 @@
             Normal: <%=bill.total[0]%>$
           </div>
           <div class="col">
-            Total Sale: <%=bill.total[1]  %>$
+            Total Savings: <%=bill.total[1]  %>$
           </div>
           <div class="col">
             Total: <%=bill.total[2]  %>$
