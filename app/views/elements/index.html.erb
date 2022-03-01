@@ -1,6 +1,66 @@
 <div class="container">
   <div class="form">
+    <%@elements.each do |element|  %>
+      <div class="row">
+        <div class="col">
+          <%=element.code  %>
+        </div>
+        <div class="col">
+           <%=link_to "Edit", edit_element_path(element), class:"btn btn-success"  %>
+        </div>
+        <div class="col">
+          <%=element.price  %>$
+        </div>
+        <div class="col">
+          <% if element.sale %>
+            <div class="row">
+              <%element.element_sales.each do |sale|  %>
+                <div class="col">
+                  Quantity: <%=sale.quantity  %>
+                </div>
+                <div class="col">
+                  Sale Price: <%=sale.sale_price  %>$
+                </div>
+                <div class="col">
+                  <%=link_to "Edit", edit_element_element_sale_path(element,sale), class:"btn btn-success", data:{bs_toggle:"modal", bs_target:"#saleElement#{sale.id}"}  %>
+                </div>
+              <%end  %>
+            </div>
+          <% end %>
+        </div>
+      </div><hr>
+    <%end  %><br>
     <%=link_to "New", new_element_path, class:"btn btn-success"  %>
     <%  %>
   </div>
+  <%@element_sales.each do |sale| %>
+    <!-- Modal -->
+  <div class="modal fade" id="saleElement<%=sale.id  %>" tabindex="-1" aria-labelledby="saleElement<%=sale.id  %>Label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="saleElement<%=sale.id  %>Label">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form">
+            <%= simple_form_for [sale.element, sale] do |f| %>
+              <%= f.error_notification %>
+              <div class="form-inputs">
+                <h3><%=f.label t("activerecord.models.#{f.object_name}")%></h3><br>
+                <%=f.input :quantity, input_html:{class:"input"}%><br>
+                <%=f.input :sale_price, input_html:{class:"input"} %><br>
+                <div class="form-actions">
+                  <%= f.button :button, :submit, class:"btn btn-success" do %>
+                    Save
+                  <%end  %>
+                </div>
+              </div>
+            <%end  %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%end  %>
 </div>

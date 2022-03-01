@@ -10,9 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_28_221946) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_28_223312) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bill_elements", force: :cascade do |t|
+    t.bigint "bill_id", null: false
+    t.bigint "element_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bill_id"], name: "index_bill_elements_on_bill_id"
+    t.index ["element_id"], name: "index_bill_elements_on_element_id"
+  end
+
+  create_table "bills", force: :cascade do |t|
+    t.string "total"
+    t.boolean "payed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "element_sales", force: :cascade do |t|
     t.bigint "element_id", null: false
@@ -32,5 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_221946) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "bill_elements", "bills"
+  add_foreign_key "bill_elements", "elements"
   add_foreign_key "element_sales", "elements"
 end
