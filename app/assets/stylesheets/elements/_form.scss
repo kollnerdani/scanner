@@ -1,3 +1,22 @@
+.modal-content{
+  background-color: $base !important;
+}
+.dropdown-menu {
+    position: absolute;
+    z-index: 1000;
+    display: none;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0;
+    font-size: 1rem;
+    color: #565656;
+    text-align: center !important;
+    list-style: none;
+    background-color: $base !important;
+    background-clip: padding-box;
+    border: 1px solid $white !important;
+    border-radius: 2px;
+}
 .form{
   text-align:center;
   padding: 5%;

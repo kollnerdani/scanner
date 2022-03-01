@@ -1,10 +1,12 @@
 class BillsController < ApplicationController
   before_action :find_bill, only:[:show,:update]
   def index
-    @bills = Bill.all
+    @bills = Bill.select{|bill| !bill.bill_elements.empty? && bill.payed}
+    @unfinished_bills = Bill.select{|bill| bill.bill_elements.empty? || !bill.payed}
   end
   def show
     @bill_element = BillElement.new
+    @element_sales = ElementSale.all
     total
   end
   def new
@@ -21,7 +23,7 @@ class BillsController < ApplicationController
   end
   def update
     total
-    @bill.total = [@normal.to_i, @total_sale.to_i, @total]
+    @bill.total = [@normal.to_f, @total_sale.to_f, @total]
     if @bill.update(bill_params)
       redirect_to bills_path
     else
@@ -45,15 +47,13 @@ private
         sale = 0
         rest = amount * Element.find(key).price
       end
-      @sale[key] = [Element.find(key).code, Element.find(key).element_sales.empty?, amount, sale.to_i + rest.to_i]
+      @sale[key] = [Element.find(key).code, Element.find(key).element_sales.empty?, amount, sale.to_f + rest.to_f]
     end
     @total_sale ||= @normal - @sale.map{|key, value| value[3]}.sum
-    if @total != nil
-      @total ||= @sale.map{|key, value| value[3]}.sum
-    else
-      @total = @normal
-    end
+
+    @total = @sale.map{|key, value| value[3]}.sum
   end
+
   def find_bill
     @bill = Bill.find(params[:id])
   end

@@ -34,16 +34,24 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="newBillElementLabel">Modal title</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="form">
+              <h4>Sales</h4>
+              <div class="row">
+                <% @element_sales.each do |sale| %>
+                  <div class="col">
+                    <%=sale.quantity  %> X <%=sale.element.code  %> = <%=sale.sale_price  %>$ <br>
+                   <%=sale.quantity  %> / <%= @bill.bill_elements.select{|bill| bill.element == sale.element}.count %>
+                  </div>
+                <%end  %>
+              </div>
               <%= simple_form_for [@bill,@bill_element] do |f| %>
                 <%= f.error_notification %>
                 <div class="form-inputs">
                   <h3><%=f.label t("activerecord.models.#{f.object_name}")%></h3><br>
-                  <%=f.input :element_id, collection: Element.all.map{|e| ["#{e.code}/#{e.price}", e.id]}%><br>
+                  <%=f.input :element_id, collection: Element.all.map{|e| ["#{e.code}  #{e.price}$", e.id]},as: :radio_buttons, input_html: { class: "tag-selector" },item_wrapper_class: 'tag-item'%><br>
                   <div class="form-actions">
                     <%= f.button :button, :submit, class:"btn btn-success" do %>
                       Save

@@ -5,9 +5,20 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+BillElement.delete_all
+puts "Adios BillElements"
+sleep 2
+Bill.delete_all
+puts "Adios Bills"
+sleep 2
 ElementSale.delete_all
+puts "Adios ElementSales"
+sleep 2
 Element.delete_all
+puts "Adios Elements"
+sleep 2
 prices = [50,30,20,15,75,20,10]
+puts "Processing"
 ("A".."G").each_with_index do |code,index|
   element = Element.new(code:code, price: prices[index])
   if code == "A"
@@ -22,3 +33,5 @@ prices = [50,30,20,15,75,20,10]
   end
   element.save
 end
+sleep 5
+puts "Finished"
