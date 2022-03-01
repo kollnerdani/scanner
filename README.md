@@ -11,6 +11,6 @@ Things you may want to cover:
   yarn install
   rails db:create rails db:migrate rails db:seed
 * run server: just dev!
-*Simple app for scan simple articles with letter as code.
-*Easy to create new elements(price, code) and sales for elements with simple logic(quantity, price).
-*Easy to create Bill of articles with full price, savings and total
+* Simple app for scan simple articles with letter as code.
+* Easy to create new elements(price, code) and sales for elements with simple logic(quantity, price).
+* Easy to create Bill of articles with full price, savings and total
