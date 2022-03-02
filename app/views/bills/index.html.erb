@@ -1,24 +1,22 @@
 <div class="container">
   <div class="form">
-    <div class="row">
-      <div class="col">
-        <%=link_to "Elements", elements_path, class:"btn btn-success"  %>
-      </div>
-      <div class="col">
-        <%=link_to "New", new_bill_path, class:"btn btn-success"  %>
-      </div>
-      <div class="col">
-        <div class="dropdown">
-          <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            Unfinished Bills
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <% @unfinished_bills.each do |bill| %>
-              <li><a class="dropdown-item" href="#"><%=link_to "Show#{bill.id}", bill_path(bill), class:"link"  %></a></li>
-            <%end  %>
-          </ul>
-        </div>
-      </div>
+    <div>
+      <%=link_to "Elements", elements_path, class:"btn btn-success"  %>
+    </div><br>
+    <div>
+      <%=link_to "New Payment", new_bill_path, class:"btn btn-success"  %>
+    </div><br>
+    <div>
+      <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          Unfinished Payments
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <% @unfinished_bills.each do |bill| %>
+            <li><a class="dropdown-item" href="#"><%=link_to "Show#{bill.id}", bill_path(bill), class:"link"  %></a></li>
+          <%end  %>
+        </ul>
+      </div><br>
     </div>
   </div>
     <%@bills.each do |bill|  %>
