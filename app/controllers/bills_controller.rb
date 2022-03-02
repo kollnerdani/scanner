@@ -47,7 +47,7 @@ private
         sale = 0
         rest = amount * Element.find(key).price
       end
-      @sale[key] = [Element.find(key).code, Element.find(key).element_sales.empty?, amount, sale.to_f + rest.to_f]
+      @sale[key] = [Element.find(key).code, Element.find(key).element_sales.empty?, amount, sale + rest]
     end
     @total_sale ||= @normal - @sale.map{|key, value| value[3]}.sum
 
