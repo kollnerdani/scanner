@@ -1,18 +1,22 @@
 <div class="container">
   <div class="form">
     <div>
-      <%=link_to "#", class:"btn btn-success", data:{bs_toggle:"modal", bs_target:"#newBillElement"} do %>
+      <% if !@bill.payed %>
+        <%=link_to "#", class:"btn btn-success", data:{bs_toggle:"modal", bs_target:"#newBillElement"} do %>
         Scan new <%=t("activerecord.models.bill_element")  %>
       <%end  %>
+      <% end %>
     </div><br>
     <% if !@bill.bill_elements.empty? %>
       <%@bill.bill_elements.each do |bill_element|  %>
         <div class="col">
           <%=bill_element.element.code  %>
           <%=bill_element.element.price  %>$
-          <%= link_to "Remove" ,bill_bill_element_path(@bill,bill_element), class: "link", data: {
+          <% if !@bill.payed %>
+            <%= link_to "Remove" ,bill_bill_element_path(@bill,bill_element), class: "link", data: {
                     turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"} %><hr>
+                    turbo_confirm: "Are you sure?"} %>
+          <% end %><hr>
         </div>
       <%end  %>
       <div class="row">
@@ -21,17 +25,19 @@
         <div class="col">Total: <br><%=@total  %>$</div>
       </div>
     <% end %>
-    <%= simple_form_for @bill do |f| %>
-      <%= f.error_notification %>
-      <div class="form-inputs">
-        <%=f.hidden_field :payed, value: true%><br>
-        <div class="form-actions">
-          <%= f.button :button, :submit, class:"btn btn-success" do %>
-            Check Out
-          <%end  %>
+    <% if !@bill.payed %>
+      <%= simple_form_for @bill do |f| %>
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <%=f.hidden_field :payed, value: true%><br>
+          <div class="form-actions">
+            <%= f.button :button, :submit, class:"btn btn-success" do %>
+              Check Out
+            <%end  %>
+          </div>
         </div>
-      </div>
-    <%end  %>
+      <%end  %>
+    <% end %>
   </div>
   <div class="modal fade" id="newBillElement" tabindex="-1" aria-labelledby="newBillElementLabel" aria-hidden="true">
       <div class="modal-dialog">
