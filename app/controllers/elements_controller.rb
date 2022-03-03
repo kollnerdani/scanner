@@ -20,7 +20,7 @@ class ElementsController < ApplicationController
     end
   end
   def edit
-    @codes = ("A".."Z").to_a - Element.select{|e| e.id != @element.id}.map{|el| el.code}
+    @codes = ("A".."Z").to_a - Element.where.not(id: @element.id).map{|el| el.code}
   end
   def update
     if params[:element][:sale] == "1" && @element.element_sales.empty?
